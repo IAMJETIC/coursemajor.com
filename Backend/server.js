@@ -50,15 +50,22 @@ app.use('/api/playlist', playlistRouter);
 app.use('/api/config/paypal',  (req, res) => {
     res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
 });
+
+const __dirname = path.resolve(); 
+app.use(express.static(path.join(__dirname, '/frontend/build'))); 
+app.get('*', (req, res) => 
+    res.sendFile(path.join(__dirname, '/frontedn/build/index.html'))
+);
+
 app.use('/api/private', privateRouter);
 
 //Error Handler (Should be the last piece of middleware)
 app.use(errorHandler);
 
 // ROUTES
-app.get('/', (req, res) => {
-    res.send('/ page');
-})
+//app.get('/', (req, res) => {
+//    res.send('/ page');
+//})
 
 const PORT = process.env.PORT || 5000;
 
