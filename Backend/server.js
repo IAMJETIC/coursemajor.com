@@ -4,7 +4,6 @@ const path = require('path'); //Load file path
 
 const express = require('express');
 const app = express();
-
 const cors = require('cors');
 const errorHandler = require('./middleware/error');
 
