@@ -28,18 +28,6 @@ const playlistRouter = require('./routes/videoPlaylist.js');
 const privateRouter = require('./routes/private');
 const routes = require('./routes/paypal.js');
 
-// MIDDLEWARE
-
-//For PayPal Payouts
-/*
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-    next();
-});
-*/
 app.use('/api/paypal', routes());
 app.use('/api/courses', coursesRouter);
 app.use('/api/reviews', reviewsRouter);
@@ -50,7 +38,6 @@ app.use('/api/playlist', playlistRouter);
 app.use('/api/config/paypal', (req, res) => {
     res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
 });
-
 const _dirname = path.resolve();
 app.use('/uploads', express.static(path.join(_dirname, '/uploads')));
 
