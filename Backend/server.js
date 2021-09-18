@@ -1,4 +1,4 @@
-require('dotenv').config({path: "../.env"});
+require('dotenv').config({ path: "../.env" });
 require('dotenv').config();
 const path = require('path'); //Load file path
 
@@ -16,7 +16,7 @@ connectDB();
 //Middlewares
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 //Import Routes
 const coursesRouter = require('./routes/courses');
@@ -47,27 +47,19 @@ app.use('/api/blogs', blogsRouter);
 app.use('/api/auth', usersRouter);
 app.use('/api/order', orderRouter);
 app.use('/api/playlist', playlistRouter);
-app.use('/api/config/paypal',  (req, res) => {
+app.use('/api/config/paypal', (req, res) => {
     res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
 });
 
-const __dirname = path.resolve();
-app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
+const _dirname = path.resolve();
+app.use('/uploads', express.static(path.join(_dirname, '/uploads')));
 
-app.use(express.static(path.join(__dirname, '/frontend/build')));
+app.use(express.static(path.join(_dirname, '/frontend/build')));
 app.get('*', (req, res) =>
-    res.sendFile(path.join(__dirname, '/frontend/build/index.html'))
+    res.sendFile(path.join(_dirname, '/frontend/build/index.html'))
 );
 
-/*
-//const __dirname = path.resolve(); 
 
-app.use(express.static(path.join(__dirname, '/frontend/build'))); 
-
-app.get('*', (req, res) => 
-    res.sendFile(path.join(__dirname, '/frontend/build/index.html'))
-);
-*/
 
 app.use('/api/private', privateRouter);
 
@@ -82,7 +74,7 @@ app.use(errorHandler);
 const PORT = process.env.PORT || 5000;
 
 //Listening to server
-const server = app.listen(PORT,()=>{console.log(`Server has started on port ${PORT}`)})
+const server = app.listen(PORT, () => { console.log(`Server has started on port ${PORT}`) })
 
 //Handling Server Errors in a nice, readable way
 process.on("unhandledRejection", (err, promise) => {
